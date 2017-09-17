@@ -135,6 +135,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="huongdan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="huongdan.Designer.cs">
+      <DependentUpon>huongdan.cs</DependentUpon>
+    </Compile>
     <Compile Include="KetNoi.cs">
       <SubType>Form</SubType>
     </Compile>
