@@ -41,7 +41,7 @@ namespace QuanLyNhanSu.CT
         }
         private void btLuu_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtTK.Text))
+            if (!string.IsNullOrEmpty(txtTK.Text))
             {
                 if (!string.IsNullOrEmpty(txtMK.Text))
                 {
@@ -68,7 +68,7 @@ namespace QuanLyNhanSu.CT
                 MessageBox.Show("Lỗi!!");
                 txtTK.Focus();
             }
-            
+
         }
 
         private void btXoa_Click(object sender, EventArgs e)
