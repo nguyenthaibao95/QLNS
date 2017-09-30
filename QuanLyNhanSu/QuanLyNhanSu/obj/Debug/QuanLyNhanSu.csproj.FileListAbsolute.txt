@@ -81,3 +81,6 @@ C:\Users\NTB\Documents\GitHub\QLNS\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNha
 C:\Users\SlowRock\Documents\GitHub\QuanLyNhanSu\QuanLyNhanSu\QuanLyNhanSu\bin\Debug\QuanLyNhanSu.exe.config
 C:\Users\SlowRock\Documents\GitHub\QuanLyNhanSu\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.exe
 C:\Users\SlowRock\Documents\GitHub\QuanLyNhanSu\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.pdb
+C:\Users\Hung\Documents\GitHub\Quản lý nhân sự\QuanLyNhanSu\QuanLyNhanSu\QuanLyNhanSu\bin\Debug\QuanLyNhanSu.exe.config
+C:\Users\Hung\Documents\GitHub\Quản lý nhân sự\QuanLyNhanSu\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.exe
+C:\Users\Hung\Documents\GitHub\Quản lý nhân sự\QuanLyNhanSu\QuanLyNhanSu\QuanLyNhanSu\obj\Debug\QuanLyNhanSu.pdb
