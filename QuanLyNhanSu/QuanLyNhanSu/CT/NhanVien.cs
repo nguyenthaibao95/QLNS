@@ -348,7 +348,7 @@ namespace QuanLyNhanSu.CT
         private void txtSoCM_Leave(object sender, EventArgs e)
         {
             string t = txtSoCM.Text;
-            if (t.Length < 😎
+            if (t.Length < 8)
             {
                 MessageBox.Show("Số Chứng minh không hợp lệ");
                 txtSoCM.Focus();
@@ -368,7 +368,7 @@ namespace QuanLyNhanSu.CT
         private void txtEmail_Leave(object sender, EventArgs e)
         {
             string t = txtEmail.Text;
-            if(t.Contains("@") != true || t.Length < 😎
+            if(t.Contains("@") != true || t.Length < 8)
             {
                 MessageBox.Show("Địa chỉ mail không hợp lệ không hợp lệ");
                 txtEmail.Focus();
