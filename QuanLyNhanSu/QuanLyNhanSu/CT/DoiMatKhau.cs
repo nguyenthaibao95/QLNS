@@ -24,7 +24,7 @@ namespace QuanLyNhanSu.CT
         public static string manv = null, taikhoan = null;
         private void lblClose_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            this.Hide();          // ẩn form này
         }
 
         private void load()
