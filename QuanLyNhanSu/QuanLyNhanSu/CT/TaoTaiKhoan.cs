@@ -22,7 +22,7 @@ namespace QuanLyNhanSu.CT
         DataTable dt = new DataTable();
         SqlDataReader dr1;
         string manv = null;
-        int dem = 0;
+        int dem = 0;        // dem thoi gian
         private void load()
         {
             dem = 0;
