@@ -120,7 +120,7 @@ namespace QuanLyNhanSu.CT
         private void txtTK_Leave(object sender, EventArgs e)
         {
             string t = txtTK.Text;
-            if (t.Length < 5)
+            if (t.Length < 5)         // độ dài text
             {
                 MessageBox.Show("Vui lòng nhập tài khoản trên 5 ký tự!!");
                 txtTK.Focus();
