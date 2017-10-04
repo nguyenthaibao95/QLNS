@@ -27,16 +27,27 @@ namespace QuanLyNhanSu.ThongKe
         }
         private void load()
         {
-            
+            btXem.Enabled = false;
         }
         private void btXem_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                DateTime ngaydau = Convert.ToDateTime(Convert.ToInt32(cbThang.Text) + "/" + "01/" + Convert.ToInt32(cbNam.Text) + " ");
+                DateTime ngaycuoi = Convert.ToDateTime(Convert.ToInt32(cbThang.Text) + "/" + "29/" + Convert.ToInt32(cbNam.Text) + " ");
+                dt.Clear();
+                dt = tkcl.tkSoNgayDiLamCuaNhanVien(ngaydau, ngaycuoi, 2);
+                dataGridView1.DataSource = dt;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi");
+            }
         }
 
         private void cbNam_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            btXem.Enabled = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
