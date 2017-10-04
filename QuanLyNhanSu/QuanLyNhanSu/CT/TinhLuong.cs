@@ -18,11 +18,45 @@ namespace QuanLyNhanSu.CT
         {
             InitializeComponent();
         }
-        
+        CauLenh cl = new CauLenh();
+        SqlDataReader dr;
+        DataTable dt = new DataTable();
+        int thang = DateTime.Now.Month, nam = DateTime.Now.Year, ngay = DateTime.Now.Day, luongcoban = 0, tongluong = 0, tienthuong = 0, tienphat = 0, phucap = 0, m = 0;
+        string manv = null, songaylam = null, songaynghicophep = null, songaynghikhongphep = null, chucvu = null;
         private void load()
         {
-            
-         
+            DateTime ngaydau, ngaycuoi;
+            songaylam = "0"; luongcoban = 0; tongluong = 0; tienthuong = 0; tienphat = 0; phucap = 0;
+            if (m == 0)
+            {
+                ngaydau = Convert.ToDateTime(thang + "/" + "01/" + nam);
+                ngaycuoi = Convert.ToDateTime(thang + "/" + "30/" + nam);
+            }
+            else
+            {
+                ngaydau = Convert.ToDateTime(txtThang.Text + "/" + "01/" + txtNam.Text);
+                ngaycuoi = Convert.ToDateTime(txtThang.Text + "/" + "30/" + txtNam.Text);
+            }
+            btCapNhat.Enabled = false;
+            lbTen.Text = null;
+            lbChucVu.Text = null;
+            lbTB.Text = null;
+            dt.Clear();
+            dt = cl.TongLuongNV("0");
+            dataGridView1.DataSource = dt;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                manv = dataGridView1.Rows[i].Cells["Ma"].Value.ToString();
+                dataGridView1.Rows[i].Cells["SNL"].Value = LaySoNgayLam(manv, ngaydau, ngaycuoi);
+                dataGridView1.Rows[i].Cells["T"].Value = TienThuong(manv, ngaydau, ngaycuoi);
+                dataGridView1.Rows[i].Cells["P"].Value = TienPhat(manv, ngaydau, ngaycuoi);
+                dataGridView1.Rows[i].Cells["PhuCap"].Value = tienPhuCap(manv, ngaycuoi);
+                tongluong = TinhLuong1(manv, songaylam, tienthuong.ToString(), tienphat.ToString(), ngaydau, ngaycuoi);
+                dataGridView1.Rows[i].Cells["TL"].Value = String.Format("{0:0,0}", tongluong);
+                //MessageBox.Show(songaylam + "\n" + tienthuong + "\n" + tienphat + "\n" + tongluong.ToString());
+
+            }
+
         }
         private string LaySoNgayLam(string manv, DateTime ngaydau, DateTime ngaycuoi)
         {
@@ -61,7 +95,7 @@ namespace QuanLyNhanSu.CT
                 dr = cl.LayTienThuong(manv, nd, nc);
                 while (dr.Read())
                 {
-                    
+
                     tien = dr.GetInt32(0);
                     ld = dr.GetString(1);
                     if (ld == "Thưởng")
@@ -111,11 +145,11 @@ namespace QuanLyNhanSu.CT
         private string LayChucVuTuMaNV1(string manv)
         {
             dr = cl.LayChucVuTuMaNV(manv);
-             while (dr.Read())
+            while (dr.Read())
             {
                 chucvu = dr.GetString(0);
             }
-             return chucvu;
+            return chucvu;
         }
         private int tienPhuCap(string manv, DateTime n)
         {
@@ -135,12 +169,12 @@ namespace QuanLyNhanSu.CT
         }
         private int TinhLuong1(string manv, string soNgayLam, string tienThuong, string tienPhat, DateTime ngaydau, DateTime ngaycuoi)
         {
-            
+
             int a = Convert.ToInt32(tienThuong) - Convert.ToInt32(tienPhat);
             int ncp = Convert.ToInt32(NghiCoPhep(manv, ngaydau, ngaycuoi));
             int luongCoBan = LayLuongCoBan(manv);
             int nl = Convert.ToInt32(songaylam);
-            int p = tienPhuCap(manv,ngaycuoi);
+            int p = tienPhuCap(manv, ngaycuoi);
             if (ncp > 3)
                 nl = nl - (ncp % 3);
             tongluong = (luongCoBan / 26) * nl + a + p;
@@ -165,9 +199,9 @@ namespace QuanLyNhanSu.CT
         private void btCapNhat_Click(object sender, EventArgs e)
         {
             int a = Convert.ToInt32(cbHeSoLuong.Text);
-            if(!string.IsNullOrEmpty(cbHeSoLuong.Text))
+            if (!string.IsNullOrEmpty(cbHeSoLuong.Text))
             {
-                if(!string.IsNullOrEmpty(txtLCB.Text))
+                if (!string.IsNullOrEmpty(txtLCB.Text))
                 {
                     if (a > 0 && a < 11)
                     {
@@ -195,23 +229,64 @@ namespace QuanLyNhanSu.CT
 
         private void cbHeSoLuong_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            int a = Convert.ToInt32(cbHeSoLuong.Text);
+            if (a > 0 && a < 11)
+            {
+                dr = cl.LayLuongCB(a);
+                while (dr.Read())
+                    txtLCB.Text = dr.GetInt32(0).ToString();
+                btCapNhat.Enabled = true;
+            }
+            else
+            {
+
+            }
         }
 
         private void btXem_Click(object sender, EventArgs e)
         {
-            
-           
+            if (!string.IsNullOrEmpty(txtThang.Text))
+            {
+                if (!string.IsNullOrEmpty(txtNam.Text))
+                {
+                    if (Convert.ToInt32(txtThang.Text) > 12 || Convert.ToInt32(txtThang.Text) < 1)
+                    {
+                        lbTB.Text = "Tháng không hợp lệ";
+                    }
+                    else
+                    {
+                        m = 1;
+                        dataGridView1.Refresh();
+                        load();
+                        lbTB.Text = null;
+                    }
+                }
+                else
+                {
+                    lbTB.Text = "Lỗi";
+                }
+            }
+            else
+            {
+                lbTB.Text = "Lỗi";
+            }
+
         }
 
         private void txtThang_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
         private void txtNam_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
 
     }
